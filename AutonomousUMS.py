@@ -110,8 +110,16 @@ def loginPage():
 	submit_button_frame=Frame(login_frame)
 	submit_button_frame.place(relx=0.3,rely=0.8,relheight=0.15,relwidth=0.4)
 
-	submit_button=Button(submit_button_frame,text="Submit",relief=RIDGE,activebackground="#bfff00",bd=3,command=storeLoginInfo,cursor="hand2")
-	submit_button.place(relx=0,rely=0,relheight=1,relwidth=1)
+	with open('configuration.txt','r+') as f4:
+		submit_button=Button(submit_button_frame,relief=RIDGE,activebackground="#bfff00",bd=3,command=storeLoginInfo,cursor="hand2")
+		if(f4.readline()=="false"):
+			submit_button.config(text="Configure")
+		else:
+			submit_button.config(text="Submit")
+
+
+		submit_button.place(relx=0,rely=0,relheight=1,relwidth=1)
+
 
 
 	disclaimer=Label(root,bg='#540C34',fg='#FFDF00',text="You only need to login once,the Username and Password will be used only for logging into AUMS\n through Web Automation, user's privacy is protected.")
