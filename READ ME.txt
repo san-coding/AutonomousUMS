@@ -1,0 +1,19 @@
+Hello , hope you're doing good , this application was created to save time and avoid the 
+boring task of logging in every time and choosing subjects, going to online exams, assignments etc.
+
+Right click on the application and select pin to taskbar for quick access,
+Avoid tampering the text files or renaming any of the files present in the folder
+as it might lead to malfunctioning of the application.
+
+Debugging
+.Make sure you have given internet access to the application
+.If your password or username is wrong, you have to loggout and login again with the correct credentials
+
+
+You can report any issues or give your feedback at sandur43@gmail.com
+You can also suggest what updates or what other features you want in the application.
+
+Regards,
+Sandeep Rajakrishnan
+ 
+

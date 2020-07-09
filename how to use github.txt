@@ -1,0 +1,89 @@
+Git has 4 areas:
+
+Working Drectory
+Staging area 
+Local repository
+Remote git repository
+
+Process
+git add -A (add changes to staging area from working directory)
+git commit -m "message" (save the canges to local repo)
+git pull origin master (pulling the changes made by others in remote repository)
+git push origin master (saving our changes in remote repository)
+
+
+STEPS
+1.create a git repository 
+git init
+
+2..add all files to staging area
+git add -A 
+
+3.Knowing what all are there in the staging area ready to be commited
+git status
+
+4.To remove all the files from staging area 
+git reset
+
+5. git commiting (it saves the changes in local repo) 
+git commit -m "message"
+
+6.Now link the remote repository in the internet to your working directory
+git remote add origin linkToTheRemoteRepository
+
+7. git branch 
+
+
+(Here origin is a label or a reference by which we will call the remote repository instead of using the URL)
+
+7.Use git pull before pushing to avoid conflicts 
+git pull -u origin master
+
+(When you're working on a project and a lot of people have access to the remote repositories, other people are 
+simultaneously using git push and , so we first need to add the changes made by other people to our local repository,
+and then push our local repository to the remote repository)
+
+
+
+8.Pushing our commited data to the remote repository
+git push -u origin master
+
+(Now we're pushing the the contents in our local repo to the remote repo)
+(we're specifying that it should be pushed to the master branch , also called the upstream branch)
+(-u flag links the master branch with our current branch in local repository)
+(so the next time you can just type "git push" and it will automatically assume you are pushing it to new branch)
+
+
+Using BRANCHES
+
+1.git branch branchName
+(This creates a branch named branchName)
+
+2.git checkout branchName
+(we switch to branchName branch)
+
+3.git branch
+(This displays all the branches)
+
+4.git merge branchName
+(This merges all the changes made in branchName branch to the master branch)
+
+5.git checkout master
+(switching back to master branch now you can git push to remote repo)
+
+6.git branch --merged
+(This shows which all branches have been merged to master)
+
+7.git branch -d branchName
+(This deletes branchName branch)
+
+(If you git push from a branch , it will create that branch in the remote repository)
+
+8.git branch -a
+(This shows you all the branches in your local and in remote repo)
+
+9.git push origin --delete branchName
+(This will delete the branch called branchName from remote repository)
+(To verify if it has worked, you can rerun 'git branch -a', it will show all the branches in remote and local repo)
+
+ 
