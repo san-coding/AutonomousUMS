@@ -37,16 +37,33 @@ title_frame_content.place(relx=0,rely=0,relheight=1,relwidth=1)
 
 def loginPage():
 
+
 	def storeLoginInfo():
 		if(len(username_frame_input.get())==16 and len(password_frame_input.get())>0):
 			with open("loginInfo.txt",'w') as f1:
 				f1.write(username_frame_input.get()+"\n"+password_frame_input.get())
 				with open("isLoggedIn.txt",'w') as f2:
 					f2.write("true")
-			login_frame.destroy()
-			disclaimer.destroy()
-			subjectSelectionPage()
+				f3=open("isLoggedIn.txt",'r')
+			
+			f=open('configuration.txt','r')
 
+			if(f.readline()=="true"):
+				login_frame.destroy()
+				disclaimer.destroy()
+				subjectSelectionPage()
+			else:
+				configured_status=configure()
+				if(configured_status):
+					print("Configured Successfully")
+					tkinter.messagebox.showinfo("Configuration Successful","all the subject names have been stored in SUBJECT LIST text file in the same folder, you cannot change the order of the subject, but you can rename them.\n \n Eg.'Subject-A' can be renamed to 'Subject-a exam tab' but it cannot be replaced with 'Subject-B'")
+
+					login_frame.destroy()
+					disclaimer.destroy()
+					subjectSelectionPage()
+				else:
+					tkinter.messagebox.showerror("Configuration Error","Do not close the window or interrupt the application while subjects are automaticaly being selected")
+			f.close()
 
 
 		else:
@@ -58,8 +75,11 @@ def loginPage():
 
 
 
+
+
+
 	login_frame=Frame(root,bg='white')
-	login_frame.place(relwidth=0.5,relheight=0.6,relx=0.25,rely=0.25)
+	login_frame.place(relwidth=0.7,relheight=0.6,relx=0.15,rely=0.25)
 
 	login_frame_heading=Label(login_frame,text="Login",fg='black',bg="white")
 	login_frame_heading.config(font=("",15))
@@ -126,7 +146,6 @@ def loginPage():
 	disclaimer.place(relx=0.035,rely=0.9)
 
 
-
 def loggout():
 	with open("isLoggedIn.txt",'w') as f2:
 		f2.write("false")
@@ -144,7 +163,7 @@ def subjectSelectionPage():
 	with open("loginInfo.txt",'r') as f1:
 		username_message_text=Label(root,text="Username: "+str(f1.readline()),bg='#540C34',fg='#FFDF00')
 		username_message_text.config(font=("",10))
-		username_message_text.place(relx=0.25,rely=0.91)
+		username_message_text.place(relx=0.15,rely=0.91)
 
 
 
@@ -158,18 +177,27 @@ def subjectSelectionPage():
 
 
 	subject_selection_frame=Frame(root,bg='white')
-	subject_selection_frame.place(relwidth=0.5,relheight=0.6,relx=0.25,rely=0.25)
+	subject_selection_frame.place(relwidth=0.7,relheight=0.6,relx=0.15,rely=0.25)
 
 	select_subject_text=Label(subject_selection_frame,text="Select subject:",anchor='w',bg='white')
 	select_subject_text.config(font=("",10))
 	select_subject_text.place(relx=0.1,rely=0.09,relwidth=0.8,relheight=0.15)
 
 	
-
-
-	subject_dropdown=Combobox(subject_selection_frame,justify=CENTER,font=("",10),state="readonly",height=20,values=["Linear Algebra Exam","Linear Algebra","Engineering Physics Exam","Engineering Physics","Computer Programming","EEE","EEE Practice","UID","Data Structures","Manufacturing Practice","Cultural Education Exam","UID Exam","Data Structures Exam","Computer Programming Exam","Discreet Mathematics","Cultural Education"])
+	f5=open('SUBJECT LIST.txt','r')
+	values=[]
+	number_of_subjects=0
+	for line in f5:
+		number_of_subjects += 1
+	print(number_of_subjects)
+	f5.seek(0)
+	for i in range(number_of_subjects):
+		values.append(f5.readline().split('\n')[0])
+	print(values)
+	subject_dropdown=Combobox(subject_selection_frame,justify=CENTER,font=("",10),state="readonly",height=20,values=values)
 	subject_dropdown.current(4)
 	subject_dropdown.place(relx=0.1,rely=0.2,relwidth=0.8,relheight=0.15)
+	f5.close()	
 
 
 	select_action_text=Label(subject_selection_frame,text="Select action:",anchor='w',bg='white',font=("",10))
@@ -184,15 +212,42 @@ def subjectSelectionPage():
 	openAUMS_button.place(relx=0.3,rely=0.8,relheight=0.15,relwidth=0.4)
 
 	loggout_button=Button(root,text="Log out",relief=RIDGE,activebackground="white",activeforeground='black',bd=3,cursor="hand2",command=loggout,fg='white',bg='black')
-	loggout_button.place(relx=0.65,rely=0.90)
+	loggout_button.place(relx=0.50,rely=0.90)
+	def reConfigure():
 
+		response=tkinter.messagebox.askokcancel("Re-configure?","NOTE \n Click on 'OK' to re-configure, reconfigure only when you have to update the SUBJECT LIST text file, be patient and do not interrupt the application while it is reconfiguring, close the chrome window and configure again if the chrome window stays inactive for long")
+
+		if(response==True):
+			reConfigure_status=configure()
+			if(reConfigure_status):
+				tkinter.messagebox.showinfo("Configuration Successful","Restart the application to see the updated list, all the subject names have been stored in SUBJECT LIST text file in the same folder, you cannot change the order of the subject, but you can rename them.\n \n Eg.'Subject-A' can be renamed to 'Subject-a exam tab' but it cannot be replaced with 'Subject-B'")
+				root.destroy()
+			else:
+				tkinter.messagebox.showerror("Configuration Error","Do not close the window or interrupt the application while subjects are automaticaly being selected")
+
+
+
+	reConfigure_button=Button(root,text="Re-configure",relief=RIDGE,activebackground="white",activeforeground='black',bd=3,cursor="hand2",command=reConfigure,fg='white',bg='black')
+	reConfigure_button.place(relx=0.70,rely=0.90)
 
 def select_frame():
-	with open("isLoggedIn.txt",'r') as f2:
-		if(f2.readline()=="false"):
-			loginPage()
-		else:
-			subjectSelectionPage()
+	f=open('configuration.txt','r+')
+	f1=open("isLoggedIn.txt",'r')
+	login_status=f1.readline()
+	if(login_status!="true" and login_status!="false"):
+		f.seek(0);f.truncate();f.write("false");f.seek(0)
+
+	configured_status=f.readline()
+	if(login_status=="false"):
+		loginPage()
+	elif(login_status=="true" and configured_status=="false"):
+		loginPage()
+	elif(login_status=="true" and configured_status=="true"):
+		subjectSelectionPage()
+	else:
+		loginPage()
+
+	f.close()
 
 
 

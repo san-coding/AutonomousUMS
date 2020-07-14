@@ -1,0 +1,16 @@
+19MAT112:Linear Algebra
+19MAT112:Linear Algebra
+19PHY101:Engineering Physics - A
+19PHY101:Engineering Physics - A
+19CSE102:Computer Programming
+19EEE111:Electrical and Electronics Engineering
+19EEE182:Elelctrical and Elelctronics Engineering Practice
+19CSE103:User Interface Design
+19CSE111:Fundamentals of Data Structures
+19MEE181:Manufacturing Practice
+Exam19CUL111:Cultural Education - II
+19CSE103
+19CSE111
+19CSE102:Computer Programming
+19CUL111:Cultural Education - II
+19MAT115:Discrete Mathematics
