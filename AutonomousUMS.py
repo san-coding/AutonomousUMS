@@ -56,7 +56,7 @@ def loginPage():
 				configured_status=configure()
 				if(configured_status):
 					print("Configured Successfully")
-					tkinter.messagebox.showinfo("Configuration Successful","all the subject names have been stored in SUBJECT LIST text file in the same folder, you cannot change the order of the subject, but you can rename them.\n \n Eg.'Subject-A' can be renamed to 'Subject-a exam tab' but it cannot be replaced with 'Subject-B'")
+					tkinter.messagebox.showinfo("Configuration Successful","All the subject names have been stored in SUBJECT LIST text file in the same folder, you cannot change the order of the subject, but you can rename them.\n \n Eg.'Subject-A' can be renamed to 'Subject-a exam tab' but it cannot be replaced with 'Subject-B'")
 
 					login_frame.destroy()
 					disclaimer.destroy()
@@ -132,10 +132,10 @@ def loginPage():
 
 	with open('configuration.txt','r+') as f4:
 		submit_button=Button(submit_button_frame,relief=RIDGE,activebackground="#bfff00",bd=3,command=storeLoginInfo,cursor="hand2")
-		if(f4.readline()=="false"):
-			submit_button.config(text="Configure")
-		else:
+		if(f4.readline()=="true"):
 			submit_button.config(text="Submit")
+		else:
+			submit_button.config(text="Configure")
 
 
 		submit_button.place(relx=0,rely=0,relheight=1,relwidth=1)

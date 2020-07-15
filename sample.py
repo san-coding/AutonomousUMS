@@ -127,18 +127,18 @@ def configure():
 
 	i=1
 	while(i<=2):
-		frame=WebDriverWait(driver,10).until(EC.presence_of_element_located((By.ID,'maincontentframe')))
+		frame=WebDriverWait(driver,300).until(EC.presence_of_element_located((By.ID,'maincontentframe')))
 		#locating the main frame on the webpage which contains other frames (depends on page architecture)	
 		frame = driver.find_element_by_id('maincontentframe') 
 		#storing the main frame in a variable
 		driver.switch_to.frame(frame)
 		#switching the driver to main frame
 
-		frame1= WebDriverWait(driver,10).until(EC.presence_of_element_located((By.NAME,"Iframe")))
+		frame1= WebDriverWait(driver,300).until(EC.presence_of_element_located((By.NAME,"Iframe")))
 		driver.switch_to.frame(frame1)
 
 		#time.sleep(1)
-		subjectSelected = WebDriverWait(driver,10).until(EC.presence_of_element_located((By.NAME,"htmlPageTopContainer_class"+str(i))))
+		subjectSelected = WebDriverWait(driver,300).until(EC.presence_of_element_located((By.NAME,"htmlPageTopContainer_class"+str(i))))
 		time.sleep(1)
 		subjectSelected.click()
 		collectClassInfo(frame)
@@ -219,30 +219,27 @@ def intranet(subject,action):
 	driver.switch_to.frame(frame)
 	#switching the driver to main frame
 
-	frame1= driver.find_element_by_name("Iframe")
+	frame1=WebDriverWait(driver,300).until(EC.presence_of_element_located((By.NAME,"Iframe")))
 	driver.switch_to.frame(frame1)
 	#this frame is child frame of main frame and the data is inside this
 	if(subject<14):
 		select_subject = Select(driver.find_element_by_name("htmlPageTopContainer_selCLass")) 
-		time.sleep(1)
+		#time.sleep(1)
 		select_subject.select_by_index(subject)
 		#time.sleep(1)
-		subjectSelected = driver.find_element_by_name("htmlPageTopContainer_class3")
-		time.sleep(1)
+		subjectSelected =WebDriverWait(driver,300).until(EC.presence_of_element_located((By.NAME,"htmlPageTopContainer_class3")))
+		#time.sleep(1)
 		subjectSelected.click()
-		time.sleep(1)
 
 	elif(subject==14):
-		subjectSelected = driver.find_element_by_name("htmlPageTopContainer_class1")
-		time.sleep(1)
+		subjectSelected =WebDriverWait(driver,300).until(EC.presence_of_element_located((By.NAME,"htmlPageTopContainer_class1")))
+		#time.sleep(1)
 		subjectSelected.click()
-		time.sleep(1)
 
 	elif(subject==15):
-		subjectSelected = driver.find_element_by_name("htmlPageTopContainer_class2")
-		time.sleep(1)
+		subjectSelected =WebDriverWait(driver,300).until(EC.presence_of_element_located((By.NAME,"htmlPageTopContainer_class2")))
+		#time.sleep(1)
 		subjectSelected.click()
-		time.sleep(1)
 
 	#for handling dropdowns we need to import Select and then pass the id or name or xpath as shown in the above code
 	#then we select the dropdown index
@@ -259,7 +256,8 @@ def intranet(subject,action):
 	#switching to default
 	driver.switch_to.frame(frame)
 	#going to main frame
-	frame1=driver.find_element_by_name("Iframe1")
+	frame1=WebDriverWait(driver,300).until(EC.presence_of_element_located((By.NAME,"Iframe1")))
+
 	driver.switch_to.frame(frame1)
 	#switching to the frame which contains online exams 
 
