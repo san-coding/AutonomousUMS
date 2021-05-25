@@ -1,2 +1,3 @@
 # AutonomousUMS
-Clone this repository, all the files must be present in a single folder to build the exe
+AutonomousUMS is a web automation project built for automating Amrita University's intranet services, it is a standalone .exe application developed using python's selenium framework and Tkinter GUI library. It helps students to gain faster access to various intranet features such as online exams, assignments, curriculam etc.![AutonomousUMS login page](https://user-images.githubusercontent.com/65719940/119442707-f2de9a80-bd45-11eb-8b17-86639439ba30.png)
+![AutonomousUMS second page](https://user-images.githubusercontent.com/65719940/119442709-f540f480-bd45-11eb-8112-bb2b00977048.png)
