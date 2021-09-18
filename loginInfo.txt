@@ -1,0 +1,2 @@
+enter your AUMS username here (not in double quotes)
+enter your AUMS password here (not in double quotes)
